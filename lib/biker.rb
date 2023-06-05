@@ -12,11 +12,15 @@ class Biker
     @acceptable_terrain << terrain
   end
 
-  def log_ride(name, distance)
-    if @rides[name]
-      @rides[name] << distance
-    else
-      @rides[name] = [distance]
+  def log_ride(ride, time)
+    if @acceptable_terrain.include?(ride.terrain) && @rides[ride]
+      @rides[ride] << time
+    else @acceptable_terrain.include?(ride.terrain)
+      @rides[ride] = [time]
     end
+  end
+
+  def personal_record(ride)
+    @ride
   end
 end
