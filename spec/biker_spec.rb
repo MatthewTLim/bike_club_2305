@@ -4,6 +4,7 @@ require './lib/biker'
 RSpec.describe Biker do
   before do
     @biker = Biker.new("Kenny", 30)
+    @biker2 = Biker.new("Athena", 15)
     @ride1 = Ride.new({name: "Walnut Creek Trail", distance: 10.7, loop: false, terrain: :hills})
     @ride2 = Ride.new({name: "Town Lake", distance: 14.9, loop: true, terrain: :gravel})
   end
@@ -32,12 +33,23 @@ RSpec.describe Biker do
 
   describe "#log_ride" do
     it "can log rides the biker has been on" do
-      biker.log_ride(ride1, 92.5)
-      biker.log_ride(ride1, 91.1)
-      biker.log_ride(ride2, 60.9)
-      biker.log_ride(ride2, 61.6)
+      @biker.learn_terrain!(:gravel)
+      @biker.learn_terrain!(:hills)
+      
+      @biker.log_ride(@ride1, 92.5)
+      @biker.log_ride(@ride1, 91.1)
+      @biker.log_ride(@ride2, 60.9)
+      @biker.log_ride(@ride2, 61.6)
 
       expect(@biker.rides).to eq({@ride1 => [92.5, 91.1], @ride2 => [60.9, 61.6]})
+    end
+  end
+
+  describe "#personal_record" do
+    xit "can report its personal record for a specific ride" do
+      expect(@biker.personal_record(@ride1)).to eq(91.1)
+      expect(@biker.personal_record(@ride2)).to eq(60.9)
+
     end
   end
 end
