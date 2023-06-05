@@ -25,4 +25,14 @@ class BikeClub
     min_time = @bikers.map { |biker| biker.rides[ride] }.flatten.min
     @bikers.select { |biker| biker.rides[ride].min == min_time }
   end
+
+  def eligible(ride)
+    qualified = []
+    @bikers.each do |biker|
+      if biker.acceptable_terrain.include?(ride.terrain) && biker.max_distance >= ride.total_distance
+        qualified << biker
+      end
+    end
+    qualified
+  end
 end
