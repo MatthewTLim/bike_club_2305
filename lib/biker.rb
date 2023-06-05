@@ -30,5 +30,5 @@ class Biker
     end
   end
 
-
+  
 end
