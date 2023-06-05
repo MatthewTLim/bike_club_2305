@@ -20,4 +20,9 @@ class BikeClub
     end
     most_rides
   end
+
+  def best_time(ride)
+    min_time = @bikers.map { |biker| biker.rides[ride] }.flatten.min
+    @bikers.select { |biker| biker.rides[ride].min == min_time }
+  end
 end
