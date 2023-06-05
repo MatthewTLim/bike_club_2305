@@ -74,12 +74,11 @@ RSpec.describe BikeClub do
       @bikeclub.add_biker(@biker)
       @bikeclub.add_biker(@biker2)
 
-      @biker.learn_terrain!(:gravel)
       @biker.learn_terrain!(:hills)
-     
-      expect(@biker.eligible(@ride1)).to eq(true)
-      expect(@biker2.eligible(@ride1)).to eq(false)
-      expect(@biker2.eligible(@ride2)).to eq(false)
+      @biker2.learn_terrain!(:gravel)
+
+      expect(@bikeclub.eligible(@ride1)).to eq([@biker])
+      expect(@bikeclub.eligible(@ride2)).to eq([@biker2])
     end
   end
 end
